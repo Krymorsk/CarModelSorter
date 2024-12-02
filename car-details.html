@@ -30,16 +30,46 @@
             sonet: {
                 name: "Kia Sonet",
                 variants: ["HTE", "HTE(O)", "HTK", "HTK(O)", "HTK+", "Gravity", "HTX", "HTX+", "GTX", "GTX+", "XLine"],
-                colors: ["White", "Black", "Red","Olive","Blue","Grey"],
-                fuelTypes: ["Petrol", "Diesel"],
-                description: "A compact SUV with advanced features and a bold design."
+                colors: ["White", "Black", "Red", "Olive", "Blue", "Grey"],
+                fuelTypes: ["Petrol", "Turbo", "Diesel"],
+                description: "A compact SUV with advanced features and a bold design.",
+                engine: {
+                    petrol: "83ps",
+                    turbo: "120ps",
+                    diesel: "116ps",
+                    torque: "115Nm (Petrol), 172Nm (Turbo), 250Nm (Diesel)"
+                },
+                dimensions: {
+                    length: "3995mm",
+                    width: "1790mm",
+                    height: "1642mm",
+                    wheelbase: "2500mm",
+                    groundClearance: "204mm",
+                    bootSpace: "385L",
+                    fuelTank: "45L"
+                }
             },
             seltos: {
                 name: "Kia Seltos",
-                variants: ["HTE",  "HTK",  "HTK+", "Gravity", "HTX", "HTX+", "GTX", "GTX+", "XLine"],
+                variants: ["HTE", "HTK", "HTK+", "Gravity", "HTX", "HTX+", "GTX", "GTX+", "XLine"],
                 colors: ["Silver", "Black", "Blue"],
-                fuelTypes: ["Petrol", "Diesel"],
-                description: "A premium SUV designed for style and comfort."
+                fuelTypes: ["Petrol", "Turbo", "Diesel"],
+                description: "A premium SUV designed for style and comfort.",
+                engine: {
+                    petrol: "115ps",
+                    turbo: "160ps",
+                    diesel: "116ps",
+                    torque: "144Nm (Petrol), 253Nm (Turbo), 250Nm (Diesel)"
+                },
+                dimensions: {
+                    length: "4365mm",
+                    width: "1800mm",
+                    height: "1645mm",
+                    wheelbase: "2610mm",
+                    groundClearance: "190mm",
+                    bootSpace: "433L",
+                    fuelTank: "50L"
+                }
             },
         };
 
@@ -51,6 +81,23 @@
                 <p><strong>Available Colors:</strong> ${carDetails.colors.join(", ")}</p>
                 <p><strong>Fuel Types:</strong> ${carDetails.fuelTypes.join(", ")}</p>
                 <p><strong>Description:</strong> ${carDetails.description}</p>
+                <h3>Engine Specifications:</h3>
+                <ul>
+                    <li><strong>Petrol:</strong> ${carDetails.engine.petrol} </li>
+                    <li><strong>Turbo:</strong> ${carDetails.engine.turbo} </li>
+                    <li><strong>Diesel:</strong> ${carDetails.engine.diesel} </li>
+                    <li><strong>Torque:</strong> ${carDetails.engine.torque} </li>
+                </ul>
+                <h3>Dimensions:</h3>
+                <ul>
+                    <li><strong>Length:</strong> ${carDetails.dimensions.length} </li>
+                    <li><strong>Width:</strong> ${carDetails.dimensions.width} </li>
+                    <li><strong>Height:</strong> ${carDetails.dimensions.height} </li>
+                    <li><strong>Wheelbase:</strong> ${carDetails.dimensions.wheelbase} </li>
+                    <li><strong>Ground Clearance:</strong> ${carDetails.dimensions.groundClearance} </li>
+                    <li><strong>Boot Space:</strong> ${carDetails.dimensions.bootSpace} </li>
+                    <li><strong>Fuel Tank Capacity:</strong> ${carDetails.dimensions.fuelTank} </li>
+                </ul>
             `;
         } else {
             document.getElementById("car-details").innerHTML = `<p>Car details not found!</p>`;
