@@ -48,7 +48,27 @@
                 fuelTank: "45L"
             }
         },
-        // Seltos and other models...
+seltos: {
+    name: "Kia Seltos",
+    variants: ["HTE", "HTK", "HTK+", "Gravity", "HTX", "HTX+", "GTX", "GTX+", "XLine"],
+    colors: ["Silver", "Black", "Blue"],
+    fuelTypes: ["Petrol", "Turbo", "Diesel"],
+    description: "A premium SUV designed for style and comfort.",
+    engine: {
+        petrol: { power: "115ps", torque: "144Nm", mileage: "17.7kmpl" },
+        turbo: { power: "160ps", torque: "253Nm", mileage: "17.7kmpl" },
+        diesel: { power: "116ps", torque: "250Nm", mileage: "20.7kmpl" }
+    },
+    dimensions: {
+        length: "4365mm",
+        width: "1800mm",
+        height: "1645mm",
+        wheelbase: "2610mm",
+        groundClearance: "190mm",
+        bootSpace: "433L",
+        fuelTank: "50L"
+    }
+}
     };
 
     const carDetails = carData[model];
