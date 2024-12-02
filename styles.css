@@ -65,6 +65,37 @@ input[type="text"]:focus {
     box-shadow: 0 0 5px rgba(56, 142, 60, 0.5);
 }
 
+/* Dropdown Styling */
+.styled-select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    background: #f9f9f9;
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.styled-select:focus {
+    border-color: #388E3C;
+    box-shadow: 0 0 5px rgba(56, 142, 60, 0.5);
+}
+
+/* Dropdown Arrow for Modern Look */
+.styled-select::after {
+    content: '▼';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
 button {
     padding: 10px 15px;
     background: #4CAF50;
@@ -85,6 +116,7 @@ button:active {
     transform: translateY(0);
 }
 
+/* Car List Styling */
 .car-list {
     display: grid;
     gap: 10px;
@@ -120,6 +152,29 @@ button:active {
     background: #D32F2F;
 }
 
+/* Footer Styling */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+.info-link {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.info-link:hover {
+    color: #388E3C;
+}
+
 /* Responsive Design */
 @media (max-width: 600px) {
     header h1 {
@@ -130,6 +185,11 @@ button:active {
         font-size: 0.9rem;
     }
 
+    .styled-select {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
     button {
         font-size: 0.9rem;
         padding: 8px 12px;
@@ -138,4 +198,16 @@ button:active {
     .car-item div {
         font-size: 0.8rem;
     }
+}
+.car-link {
+    color: #4CAF50;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.car-link:hover {
+    color: #388E3C;
+    text-decoration: underline;
 }

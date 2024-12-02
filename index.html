@@ -10,30 +10,55 @@
     <div class="container">
         <header>
             <h1>Kia Showroom Inventory</h1>
-            <p>Track VINs, Variants, and Colors with ease!</p>
+            <p>Track VINs, Models, Variants, Colors, and Fuel Types!</p>
         </header>
         <div class="form-group">
-            <label for="vin">VIN Number</label>
-            <input type="text" id="vin" placeholder="Enter VIN (e.g., ABC123456789)">
+            <label for="model">Car Model</label>
+            <select id="model" class="styled-select" onchange="updateVariants()">
+                <option value="">Select Car Model</option>
+                <option value="Sonet">Sonet</option>
+                <option value="Seltos">Seltos</option>
+                <option value="Carens">Carens</option>
+                <option value="EV6">EV6</option>
+                <option value="Carnival">Carnival</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="variant">Variant</label>
-            <input type="text" id="variant" placeholder="Enter Variant (e.g., GTX, HTX)">
+            <select id="variant" class="styled-select">
+                <option value="">Select Variant</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="color">Color</label>
             <input type="text" id="color" placeholder="Enter Color (e.g., Black, White)">
         </div>
         <div class="form-group">
+            <label for="fuel">Fuel Type</label>
+            <select id="fuel" class="styled-select">
+                <option value="">Select Fuel Type</option>
+                <option value="Petrol">Petrol</option>
+                <option value="Turbo">Turbo</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="vin">VIN Number</label>
+            <input type="text" id="vin" placeholder="Enter VIN (e.g., ABC123456789)">
+        </div>
+        <div class="form-group">
             <button onclick="addCar()">Add Car</button>
         </div>
         <div class="search-box">
             <label for="search">Search</label>
-            <input type="text" id="search" placeholder="Search by VIN, Variant, or Color" oninput="searchCars()">
+            <input type="text" id="search" placeholder="Search by any field" oninput="searchCars()">
         </div>
         <div class="car-list" id="carList">
             <!-- Cars will be displayed here -->
         </div>
+        <footer>
+            <p>Developed by Arish Ahmad</p>
+            <a href="car_info.html" class="info-link">Learn More About Kia Cars</a>
+        </footer>
     </div>
     <script src="script.js"></script>
 </body>

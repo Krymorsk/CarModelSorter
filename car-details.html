@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="car-title">Car Details</h1>
+            <p>Detailed specifications of the selected car.</p>
+        </header>
+
+        <div id="car-details">
+            <!-- Details will load here dynamically -->
+        </div>
+
+        <footer>
+            <p>Created by Arish Ahmad. <a href="car-info.html" class="info-link">Back to Car Info</a></p>
+        </footer>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const model = params.get('model');
+
+        const carData = {
+            sonet: {
+                name: "Kia Sonet",
+                variants: ["HTE", "HTE(O)", "HTK", "HTK(O)", "HTK+", "Gravity", "HTX", "HTX+", "GTX", "GTX+", "XLine"],
+                colors: ["White", "Black", "Red","Olive","Blue","Grey"],
+                fuelTypes: ["Petrol", "Diesel"],
+                description: "A compact SUV with advanced features and a bold design."
+            },
+            seltos: {
+                name: "Kia Seltos",
+                variants: ["HTE",  "HTK",  "HTK+", "Gravity", "HTX", "HTX+", "GTX", "GTX+", "XLine"],
+                colors: ["Silver", "Black", "Blue"],
+                fuelTypes: ["Petrol", "Diesel"],
+                description: "A premium SUV designed for style and comfort."
+            },
+        };
+
+        const carDetails = carData[model];
+        if (carDetails) {
+            document.getElementById("car-title").innerText = carDetails.name;
+            document.getElementById("car-details").innerHTML = `
+                <p><strong>Variants:</strong> ${carDetails.variants.join(", ")}</p>
+                <p><strong>Available Colors:</strong> ${carDetails.colors.join(", ")}</p>
+                <p><strong>Fuel Types:</strong> ${carDetails.fuelTypes.join(", ")}</p>
+                <p><strong>Description:</strong> ${carDetails.description}</p>
+            `;
+        } else {
+            document.getElementById("car-details").innerHTML = `<p>Car details not found!</p>`;
+        }
+    </script>
+</body>
+</html>
