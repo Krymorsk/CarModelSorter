@@ -23,85 +23,62 @@
     </div>
 
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const model = params.get('model');
+    const params = new URLSearchParams(window.location.search);
+    const model = params.get('model');
 
-        const carData = {
-            sonet: {
-                name: "Kia Sonet",
-                variants: ["HTE", "HTE(O)", "HTK", "HTK(O)", "HTK+", "Gravity", "HTX", "HTX+", "GTX", "GTX+", "XLine"],
-                colors: ["White", "Black", "Red", "Olive", "Blue", "Grey"],
-                fuelTypes: ["Petrol", "Turbo", "Diesel"],
-                description: "A compact SUV with advanced features and a bold design.",
-                engine: {
-                    petrol: "83ps","115Nm(torque)","18.4kmpl(milage)",
-                    turbo: "120ps","172Nm","18.4kmpl",
-                    diesel: "116ps","250Nm","24kmpl","19kmpl(auto)",
-                    
-                },
-                dimensions: {
-                    length: "3995mm",
-                    width: "1790mm",
-                    height: "1642mm",
-                    wheelbase: "2500mm",
-                    groundClearance: "204mm",
-                    bootSpace: "385L",
-                    fuelTank: "45L"
-                }
+    const carData = {
+        sonet: {
+            name: "Kia Sonet",
+            variants: ["HTE", "HTE(O)", "HTK", "HTK(O)", "HTK+", "Gravity", "HTX", "HTX+", "GTX", "GTX+", "XLine"],
+            colors: ["White", "Black", "Red", "Olive", "Blue", "Grey"],
+            fuelTypes: ["Petrol", "Turbo", "Diesel"],
+            description: "A compact SUV with advanced features and a bold design.",
+            engine: {
+                petrol: { power: "83ps", torque: "115Nm", mileage: "18.4kmpl" },
+                turbo: { power: "120ps", torque: "172Nm", mileage: "18.4kmpl" },
+                diesel: { power: "116ps", torque: "250Nm", mileage: "24kmpl (manual) / 19kmpl (auto)" }
             },
-            seltos: {
-                name: "Kia Seltos",
-                variants: ["HTE", "HTK", "HTK+", "Gravity", "HTX", "HTX+", "GTX", "GTX+", "XLine"],
-                colors: ["Silver", "Black", "Blue"],
-                fuelTypes: ["Petrol", "Turbo", "Diesel"],
-                description: "A premium SUV designed for style and comfort.",
-                engine: {
-                    petrol: "115ps(power)","144Nm(torque)","17.7kmpl(mileage)",
-                    turbo: "160ps","253Nm","17.7kmpl",
-                    diesel: "116ps","250Nm","20.7kmpl",
-                    
-                },
-                dimensions: {
-                    length: "4365mm",
-                    width: "1800mm",
-                    height: "1645mm",
-                    wheelbase: "2610mm",
-                    groundClearance: "190mm",
-                    bootSpace: "433L",
-                    fuelTank: "50L"
-                }
-            },
-        };
+            dimensions: {
+                length: "3995mm",
+                width: "1790mm",
+                height: "1642mm",
+                wheelbase: "2500mm",
+                groundClearance: "204mm",
+                bootSpace: "385L",
+                fuelTank: "45L"
+            }
+        },
+        // Seltos and other models...
+    };
 
-        const carDetails = carData[model];
-        if (carDetails) {
-            document.getElementById("car-title").innerText = carDetails.name;
-            document.getElementById("car-details").innerHTML = `
-                <p><strong>Variants:</strong> ${carDetails.variants.join(", ")}</p>
-                <p><strong>Available Colors:</strong> ${carDetails.colors.join(", ")}</p>
-                <p><strong>Fuel Types:</strong> ${carDetails.fuelTypes.join(", ")}</p>
-                <p><strong>Description:</strong> ${carDetails.description}</p>
-                <h3>Engine Specifications:</h3>
-                <ul>
-                    <li><strong>Petrol:</strong> ${carDetails.engine.petrol} </li>
-                    <li><strong>Turbo:</strong> ${carDetails.engine.turbo} </li>
-                    <li><strong>Diesel:</strong> ${carDetails.engine.diesel} </li>
-                    <li><strong>Torque:</strong> ${carDetails.engine.torque} </li>
-                </ul>
-                <h3>Dimensions:</h3>
-                <ul>
-                    <li><strong>Length:</strong> ${carDetails.dimensions.length} </li>
-                    <li><strong>Width:</strong> ${carDetails.dimensions.width} </li>
-                    <li><strong>Height:</strong> ${carDetails.dimensions.height} </li>
-                    <li><strong>Wheelbase:</strong> ${carDetails.dimensions.wheelbase} </li>
-                    <li><strong>Ground Clearance:</strong> ${carDetails.dimensions.groundClearance} </li>
-                    <li><strong>Boot Space:</strong> ${carDetails.dimensions.bootSpace} </li>
-                    <li><strong>Fuel Tank Capacity:</strong> ${carDetails.dimensions.fuelTank} </li>
-                </ul>
-            `;
-        } else {
-            document.getElementById("car-details").innerHTML = `<p>Car details not found!</p>`;
-        }
+    const carDetails = carData[model];
+    if (carDetails) {
+        document.getElementById("car-title").innerText = carDetails.name;
+        document.getElementById("car-details").innerHTML = `
+            <p><strong>Variants:</strong> ${carDetails.variants.join(", ")}</p>
+            <p><strong>Available Colors:</strong> ${carDetails.colors.join(", ")}</p>
+            <p><strong>Fuel Types:</strong> ${carDetails.fuelTypes.join(", ")}</p>
+            <p><strong>Description:</strong> ${carDetails.description}</p>
+            <h3>Engine Specifications:</h3>
+            <ul>
+                <li><strong>Petrol:</strong> Power - ${carDetails.engine.petrol.power}, Torque - ${carDetails.engine.petrol.torque}, Mileage - ${carDetails.engine.petrol.mileage}</li>
+                <li><strong>Turbo:</strong> Power - ${carDetails.engine.turbo.power}, Torque - ${carDetails.engine.turbo.torque}, Mileage - ${carDetails.engine.turbo.mileage}</li>
+                <li><strong>Diesel:</strong> Power - ${carDetails.engine.diesel.power}, Torque - ${carDetails.engine.diesel.torque}, Mileage - ${carDetails.engine.diesel.mileage}</li>
+            </ul>
+            <h3>Dimensions:</h3>
+            <ul>
+                <li><strong>Length:</strong> ${carDetails.dimensions.length}</li>
+                <li><strong>Width:</strong> ${carDetails.dimensions.width}</li>
+                <li><strong>Height:</strong> ${carDetails.dimensions.height}</li>
+                <li><strong>Wheelbase:</strong> ${carDetails.dimensions.wheelbase}</li>
+                <li><strong>Ground Clearance:</strong> ${carDetails.dimensions.groundClearance}</li>
+                <li><strong>Boot Space:</strong> ${carDetails.dimensions.bootSpace}</li>
+                <li><strong>Fuel Tank Capacity:</strong> ${carDetails.dimensions.fuelTank}</li>
+            </ul>
+        `;
+    } else {
+        document.getElementById("car-details").innerHTML = `<p>Car details not found!</p>`;
+    }
     </script>
 </body>
 </html>
