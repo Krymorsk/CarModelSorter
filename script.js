@@ -5,16 +5,31 @@ const fuelInput = document.getElementById("fuel");
 const modelInput = document.getElementById("model");
 const variantInput = document.getElementById("variant");
 const searchInput = document.getElementById("search");
+const carModelSelect = document.getElementById("car-model");
+const carVariantSelect = document.getElementById("car-variant");
+const fuelTypeSelect = document.getElementById("fuel-type");
+const transmissionTypeSelect = document.getElementById("transmission-type");
+const pricingOutput = document.getElementById("pricing-output");
 
 let cars = [];
 
-// Variants by model
-const modelVariants = {
-    Sonet: ["HTE", "HTE(O)", "HTK", "HTK(O)", "HTK+", "Gravity", "HTX", "HTX+", "GTX", "GTX+", "XLine"],
-    Seltos: ["HTE", "HTK", "HTK+", "HTX", "Gravity", "HTX+", "GTX", "GTX+", "XLine"],
-    Carens: ["Premium", "Premium (O)", "Gravity", "Prestige", "Prestige (O)", "Prestige Plus", "Prestige Plus (O)", "Luxury", "Luxury Plus", "XLine"],
-    EV6: ["GT", "GT (AWD)"],
-    Carnival: ["Prestige", "Prestige Plus", "Limousine", "Limousine Plus"],
+// Car Data
+const carData = {
+    sonet: {
+        variants: ["HTE", "HTK", "HTX", "GTX"],
+        fuelTypes: ["Petrol", "Diesel"],
+        transmission: ["Manual", "Automatic"],
+        pricing: {
+            HTE: { Petrol: { Manual: { exShowroom: 799900, tcs: 6600, insurance: 38645, total: 945002 } } },
+            HTK: { Petrol: { Manual: { exShowroom: 902900, tcs: 9026, insurance: 41555, total: 1059152 } } }
+        }
+    },
+    seltos: {
+        // Add Seltos details
+    },
+    carens: {
+        // Add Carens details
+    }
 };
 
 // Load cars from localStorage on page load
@@ -26,12 +41,12 @@ window.onload = function () {
     }
 };
 
-// Update variants based on the selected model
+// Update variants dynamically based on the selected model
 function updateVariants() {
-    const selectedModel = modelInput.value;
+    const selectedModel = modelInput.value.toLowerCase();
     variantInput.innerHTML = '<option value="">Select Variant</option>'; // Clear existing options
-    if (modelVariants[selectedModel]) {
-        modelVariants[selectedModel].forEach(variant => {
+    if (carData[selectedModel]) {
+        carData[selectedModel].variants.forEach(variant => {
             const option = document.createElement("option");
             option.value = variant;
             option.textContent = variant;
@@ -110,3 +125,58 @@ function searchCars() {
     const filter = searchInput.value;
     renderCars(filter);
 }
+
+// Populate pricing dropdowns dynamically
+carModelSelect.addEventListener("change", () => {
+    const model = carModelSelect.value.toLowerCase();
+    if (carData[model]) {
+        const { variants, fuelTypes, transmission } = carData[model];
+
+        carVariantSelect.innerHTML = `<option value="" disabled selected>Select Variant</option>`;
+        variants.forEach(variant => {
+            carVariantSelect.innerHTML += `<option value="${variant}">${variant}</option>`;
+        });
+
+        fuelTypeSelect.innerHTML = `<option value="" disabled selected>Select Fuel Type</option>`;
+        fuelTypes.forEach(fuel => {
+            fuelTypeSelect.innerHTML += `<option value="${fuel}">${fuel}</option>`;
+        });
+
+        transmissionTypeSelect.innerHTML = `<option value="" disabled selected>Select Transmission</option>`;
+        transmission.forEach(trans => {
+            transmissionTypeSelect.innerHTML += `<option value="${trans}">${trans}</option>`;
+        });
+
+        carVariantSelect.disabled = false;
+        fuelTypeSelect.disabled = false;
+        transmissionTypeSelect.disabled = false;
+    }
+});
+
+// Display pricing details
+const displayPricing = () => {
+    const model = carModelSelect.value.toLowerCase();
+    const variant = carVariantSelect.value;
+    const fuel = fuelTypeSelect.value;
+    const transmission = transmissionTypeSelect.value;
+
+    if (model && variant && fuel && transmission) {
+        const pricing = carData[model]?.pricing[variant]?.[fuel]?.[transmission];
+        if (pricing) {
+            pricingOutput.innerHTML = `
+                <p><strong>Ex-Showroom:</strong> ₹${pricing.exShowroom}</p>
+                <p><strong>TCS:</strong> ₹${pricing.tcs}</p>
+                <p><strong>Insurance:</strong> ₹${pricing.insurance}</p>
+                <p><strong>Total Price:</strong> ₹${pricing.total}</p>
+            `;
+        } else {
+            pricingOutput.innerHTML = `<p>Pricing details not available for the selected options.</p>`;
+        }
+    } else {
+        pricingOutput.innerHTML = `<p>Please select all options to view pricing.</p>`;
+    }
+};
+
+carVariantSelect.addEventListener("change", displayPricing);
+fuelTypeSelect.addEventListener("change", displayPricing);
+transmissionTypeSelect.addEventListener("change", displayPricing);
