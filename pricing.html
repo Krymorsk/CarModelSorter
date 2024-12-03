@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Pricing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Kia Car Pricing</h1>
+            <p>Select a car model, variant, fuel type, and transmission type to view the pricing details.</p>
+        </header>
+
+        <!-- Dropdowns for filtering -->
+        <div class="form-group">
+            <label for="car-model">Car Model:</label>
+            <select id="car-model" class="styled-select">
+                <option value="" disabled selected>Select Model</option>
+                <option value="sonet">Sonet</option>
+                <option value="seltos">Seltos</option>
+                <option value="carens">Carens</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="car-variant">Variant:</label>
+            <select id="car-variant" class="styled-select" disabled>
+                <option value="" disabled selected>Select Variant</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="fuel-type">Fuel Type:</label>
+            <select id="fuel-type" class="styled-select" disabled>
+                <option value="" disabled selected>Select Fuel Type</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="transmission-type">Transmission Type:</label>
+            <select id="transmission-type" class="styled-select" disabled>
+                <option value="" disabled selected>Select Transmission</option>
+            </select>
+        </div>
+
+        <!-- Pricing details -->
+        <div id="pricing-details" style="margin-top: 20px;">
+            <h3>Pricing Breakdown</h3>
+            <p id="pricing-output">Select options to view the pricing.</p>
+        </div>
+
+        <footer>
+            <p>Created by Arish Ahmad. <a href="car-info.html" class="info-link">Back to Car Info</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
