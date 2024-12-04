@@ -16,7 +16,7 @@ body {
 .container {
     width: 90%;
     max-width: 600px;
-    background: rgba(255, 255, 255, 0.9) url('img2.jpg') no-repeat center center; /* Add background image */
+    background: rgba(255, 255, 255, 0.9) url('img.jpg') no-repeat center center; /* Add background image */
     background-size: cover; /* Ensure the image covers the box */
     color: #333;
     border-radius: 12px;
