@@ -1,39 +1,39 @@
 {
-    "sonet": {
-      "HTE": {
-        "Petrol": {
-          "Manual": {
-            "exShowroom": 800000,
-            "tcs": 10000,
-            "insurance": 15000,
-            "basicKit": 12000,
-            "total": 837000
-          },
-          "Automatic": {
-            "exShowroom": 850000,
-            "tcs": 10000,
-            "insurance": 15000,
-            "basicKit": 12000,
-            "total": 887000
-          }
-        },
-        "Diesel": {
-          "Manual": {
-            "exShowroom": 900000,
-            "tcs": 10000,
-            "insurance": 15000,
-            "basicKit": 12000,
-            "total": 937000
-          },
-          "Automatic": {
-            "exShowroom": 950000,
-            "tcs": 10000,
-            "insurance": 15000,
-            "basicKit": 12000,
-            "total": 987000
-          }
-        }
+  "sonet": {
+    "5MT HTE": {
+      "Petrol": {
+        "exShowroom": 799900,
+        "tcs": 0,
+        "rto":66092,
+        "insurance": 38645,
+        "fastag": 700,
+        "extendedwarranty": 19771,
+        "basicKit": 20094,
+        "total": 945002
+      },
+      "Diesel": {
+        "exShowroom": 900000,
+        "tcs": 10000,
+        "insurance": 15000,
+        "basicKit": 12000,
+        "total": 937000
+      }
+    },
+    "7DCT HTX": {
+      "Petrol": {
+        "exShowroom": 850000,
+        "tcs": 10000,
+        "insurance": 15000,
+        "basicKit": 12000,
+        "total": 887000
+      },
+      "Diesel": {
+        "exShowroom": 950000,
+        "tcs": 10000,
+        "insurance": 15000,
+        "basicKit": 12000,
+        "total": 987000
       }
     }
   }
-  
+}
