@@ -1,0 +1,39 @@
+{
+    "sonet": {
+      "HTE": {
+        "Petrol": {
+          "Manual": {
+            "exShowroom": 800000,
+            "tcs": 10000,
+            "insurance": 15000,
+            "basicKit": 12000,
+            "total": 837000
+          },
+          "Automatic": {
+            "exShowroom": 850000,
+            "tcs": 10000,
+            "insurance": 15000,
+            "basicKit": 12000,
+            "total": 887000
+          }
+        },
+        "Diesel": {
+          "Manual": {
+            "exShowroom": 900000,
+            "tcs": 10000,
+            "insurance": 15000,
+            "basicKit": 12000,
+            "total": 937000
+          },
+          "Automatic": {
+            "exShowroom": 950000,
+            "tcs": 10000,
+            "insurance": 15000,
+            "basicKit": 12000,
+            "total": 987000
+          }
+        }
+      }
+    }
+  }
+  
