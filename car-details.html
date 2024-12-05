@@ -48,27 +48,48 @@
                 fuelTank: "45L"
             }
         },
-seltos: {
-    name: "Kia Seltos",
-    variants: ["HTE", "HTK", "HTK+", "Gravity", "HTX", "HTX+", "GTX", "GTX+", "XLine"],
-    colors: ["Silver", "Black", "Blue"],
-    fuelTypes: ["Petrol", "Turbo", "Diesel"],
-    description: "A premium SUV designed for style and comfort.",
-    engine: {
-        petrol: { power: "115ps", torque: "144Nm", mileage: "17.7kmpl" },
-        turbo: { power: "160ps", torque: "253Nm", mileage: "17.7kmpl" },
-        diesel: { power: "116ps", torque: "250Nm", mileage: "20.7kmpl" }
-    },
-    dimensions: {
-        length: "4365mm",
-        width: "1800mm",
-        height: "1645mm",
-        wheelbase: "2610mm",
-        groundClearance: "190mm",
-        bootSpace: "433L",
-        fuelTank: "50L"
-    }
-}
+        seltos: {
+            name: "Kia Seltos",
+            variants: ["HTE", "HTK", "HTK+", "Gravity", "HTX", "HTX+", "GTX", "GTX+", "XLine"],
+            colors: ["Silver", "Black", "Blue"],
+            fuelTypes: ["Petrol", "Turbo", "Diesel"],
+            description: "A premium SUV designed for style and comfort.",
+            engine: {
+                petrol: { power: "115ps", torque: "144Nm", mileage: "17.7kmpl" },
+                turbo: { power: "160ps", torque: "253Nm", mileage: "17.7kmpl" },
+                diesel: { power: "116ps", torque: "250Nm", mileage: "20.7kmpl" }
+            },
+            dimensions: {
+                length: "4365mm",
+                width: "1800mm",
+                height: "1645mm",
+                wheelbase: "2610mm",
+                groundClearance: "190mm",
+                bootSpace: "433L",
+                fuelTank: "50L"
+            }
+        },
+        carens: {
+            name: "Kia Carens",
+            variants: ["Premium", "Premium (O)", "Gravity", "Prestige", "Prestige (O)", "Prestige Plus", "Prestige Plus (O)", "Luxury", "Luxury Plus", "XLine"],
+            colors: ["White", "Blue", "Silver"],
+            fuelTypes: ["Petrol", "Turbo", "Diesel"],
+            description: "A spacious and family-friendly MPV with advanced safety features.",
+            engine: {
+                petrol: { power: "160ps", torque: "253Nm", mileage: "16.5kmpl" },
+                turbo: { power: "115ps", torque: "144Nm", mileage: "16.2kmpl" },
+                diesel: { power: "116ps", torque: "250Nm", mileage: "21.3kmpl" }
+            },
+            dimensions: {
+                length: "4540mm",
+                width: "1800mm",
+                height: "1708mm",
+                wheelbase: "2780mm",
+                groundClearance: "190mm",
+                bootSpace: "216L (Expandable to 645L)",
+                fuelTank: "45L"
+            }
+        }
     };
 
     const carDetails = carData[model];
