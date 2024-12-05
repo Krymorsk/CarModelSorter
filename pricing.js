@@ -1,7 +1,6 @@
 const carModelSelect = document.getElementById("car-model");
 const carVariantSelect = document.getElementById("car-variant");
 const fuelTypeSelect = document.getElementById("fuel-type");
-const transmissionTypeSelect = document.getElementById("transmission-type");
 const pricingOutput = document.getElementById("pricing-output");
 
 let pricingData = {}; // To store data loaded from pricing.json
@@ -9,25 +8,19 @@ let pricingData = {}; // To store data loaded from pricing.json
 // Car Data
 const carData = {
     sonet: {
-        variants: ["HTE", "HTE(O)", "HTK", "HTK(O)", "HTK+", "Gravity", "HTX", "HTX+", "GTX", "GTX+", "XLine"],
-        fuelTypes: ["Petrol", "Diesel"],
-        transmission: ["Manual", "Automatic"],
+        variants: {
+            petrol: ["5MT HTE", "7DCT HTX"],
+            diesel: ["5MT HTE Diesel", "7DCT HTX Diesel"]
+        },
+        fuelTypes: ["Petrol", "Diesel"]
     },
     seltos: {
-        variants: ["HTE", "HTK", "HTK+", "HTX", "Gravity", "HTX+", "GTX", "GTX+", "XLine"],
-        fuelTypes: ["Petrol", "Diesel"],
-        transmission: ["Manual", "Automatic"],
-    },
-    carens: {
-        variants: ["Premium", "Premium (O)", "Gravity", "Prestige", "Prestige (O)", "Prestige Plus", "Prestige Plus (O)", "Luxury", "Luxury Plus", "XLine"],
-        fuelTypes: ["Petrol", "Diesel"],
-        transmission: ["Manual", "Automatic"],
-    },
-    EV6: {
-        variants: ["GT", "GT (AWD)"],
-        fuelTypes: ["Electric"],
-        transmission: ["Automatic"],
-    },
+        variants: {
+            petrol: ["HTE", "HTX"],
+            diesel: ["HTE Diesel", "HTX Diesel"]
+        },
+        fuelTypes: ["Petrol", "Diesel"]
+    }
 };
 
 // Load pricing data from pricing.json
@@ -41,65 +34,75 @@ async function loadPricingData() {
     }
 }
 
-// Event listener setup
-document.addEventListener("DOMContentLoaded", async function () {
-    await loadPricingData(); // Ensure pricing data is loaded before interacting with it
-    
-    // Attach event listener to model selection to trigger variant update
-    carModelSelect.addEventListener('change', updateVariants);
-    carVariantSelect.addEventListener('change', displayPricing);
-    fuelTypeSelect.addEventListener('change', displayPricing);
-    transmissionTypeSelect.addEventListener('change', displayPricing);
-});
-
-// Update variants dynamically based on the selected model
+// Update fuel type and variants dynamically based on the selected model
 function updateVariants() {
     const selectedModel = carModelSelect.value.toLowerCase();
-    carVariantSelect.innerHTML = '<option value="" disabled selected>Select Variant</option>'; // Clear existing options
-    fuelTypeSelect.innerHTML = '<option value="" disabled selected>Select Fuel Type</option>';
-    transmissionTypeSelect.innerHTML = '<option value="" disabled selected>Select Transmission</option>';
-    
-    if (carData[selectedModel]) {
-        // Enable and populate the Variant dropdown
-        carData[selectedModel].variants.forEach(variant => {
-            const option = document.createElement("option");
-            option.value = variant;
-            option.textContent = variant;
-            carVariantSelect.appendChild(option);
-        });
+    fuelTypeSelect.innerHTML = '<option value="" disabled selected>Select Fuel Type</option>'; // Clear existing options
+    carVariantSelect.innerHTML = '<option value="" disabled selected>Select Variant</option>';
 
-        // Enable and populate the Fuel Type dropdown
+    if (carData[selectedModel]) {
+        // Populate the Fuel Type dropdown
         carData[selectedModel].fuelTypes.forEach(fuel => {
             const option = document.createElement("option");
-            option.value = fuel;
+            option.value = fuel.toLowerCase(); // Use lower case for consistency
             option.textContent = fuel;
             fuelTypeSelect.appendChild(option);
         });
 
-        // Enable and populate the Transmission Type dropdown
-        carData[selectedModel].transmission.forEach(transmission => {
-            const option = document.createElement("option");
-            option.value = transmission;
-            option.textContent = transmission;
-            transmissionTypeSelect.appendChild(option);
-        });
+        // Enable the Fuel Type dropdown
+        fuelTypeSelect.disabled = false;
+
+        // Clear the pricing output
+        pricingOutput.innerHTML = "Select options to view the pricing.";
     }
-
-    // Enable the Variant, Fuel Type, and Transmission dropdowns
-    carVariantSelect.disabled = false;
-    fuelTypeSelect.disabled = false;
-    transmissionTypeSelect.disabled = false;
-
-    // Clear pricing output
-    pricingOutput.innerHTML = "Select options to view the pricing.";
 }
 
-// Get pricing for a selected model, variant, fuel, and transmission
-function getPricing(model, variant, fuel, transmission) {
-    const modelData = pricingData[model.toLowerCase()];
-    if (modelData && modelData[variant] && modelData[variant][fuel]) {
-        return modelData[variant][fuel][transmission] || null;
+// Update variants based on the selected fuel type
+function updateVariantsByFuelType() {
+    const selectedModel = carModelSelect.value.toLowerCase();
+    const selectedFuel = fuelTypeSelect.value;
+
+    carVariantSelect.innerHTML = '<option value="" disabled selected>Select Variant</option>'; // Clear existing options
+
+    if (carData[selectedModel] && selectedFuel) {
+        const variants = carData[selectedModel].variants[selectedFuel]; // Get variants for the selected fuel type
+
+        // Populate the Variant dropdown
+        if (variants && variants.length > 0) {
+            variants.forEach(variant => {
+                const option = document.createElement("option");
+                option.value = variant;
+                option.textContent = variant;
+                carVariantSelect.appendChild(option);
+            });
+
+            // Enable the Variant dropdown
+            carVariantSelect.disabled = false;
+        } else {
+            carVariantSelect.disabled = true;
+        }
+
+        // Clear pricing output
+        pricingOutput.innerHTML = "Select options to view the pricing.";
     }
+}
+
+// Get pricing for a selected model, variant, and fuel
+function getPricing(model, variant, fuel) {
+    console.log("Fetching pricing for:", { model, variant, fuel }); // Log inputs
+
+    // Normalize keys to match JSON structure
+    const modelData = pricingData[model.toLowerCase()];
+    if (modelData) {
+        const variantData = modelData[variant]; // Variant is case-sensitive
+        if (variantData) {
+            const fuelData = variantData[fuel.charAt(0).toUpperCase() + fuel.slice(1).toLowerCase()]; // Capitalize fuel
+            if (fuelData) {
+                return fuelData;
+            }
+        }
+    }
+    console.error("Pricing data not found for:", { model, variant, fuel });
     return null;
 }
 
@@ -108,14 +111,16 @@ function displayPricing() {
     const model = carModelSelect.value;
     const variant = carVariantSelect.value;
     const fuel = fuelTypeSelect.value;
-    const transmission = transmissionTypeSelect.value;
 
-    const pricing = getPricing(model, variant, fuel, transmission);
+    const pricing = getPricing(model, variant, fuel);
     if (pricing) {
         pricingOutput.innerHTML = `
             <p><strong>Ex-Showroom Price:</strong> ₹${pricing.exShowroom}</p>
             <p><strong>TCS:</strong> ₹${pricing.tcs}</p>
+            <p><strong>RTO:</strong> ₹${pricing.rto}</p>
             <p><strong>Insurance:</strong> ₹${pricing.insurance}</p>
+            <p><strong>FASTAG:</strong> ₹${pricing.fastag}</p>
+            <p><strong>ExWarranty:</strong> ₹${pricing.extendedwarranty}</p>
             <p><strong>Basic Kit:</strong> ₹${pricing.basicKit}</p>
             <p><strong>Total:</strong> ₹${pricing.total}</p>
         `;
@@ -123,3 +128,13 @@ function displayPricing() {
         pricingOutput.innerHTML = "<p>Pricing information not available.</p>";
     }
 }
+
+// Event listener setup
+document.addEventListener("DOMContentLoaded", async function () {
+    await loadPricingData(); // Ensure pricing data is loaded before interacting with it
+
+    // Attach event listeners
+    carModelSelect.addEventListener('change', updateVariants);
+    fuelTypeSelect.addEventListener('change', updateVariantsByFuelType);
+    carVariantSelect.addEventListener('change', displayPricing);
+});
