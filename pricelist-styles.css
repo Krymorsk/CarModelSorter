@@ -14,7 +14,7 @@ body {
 /* Container Styling */
 .container {
     width: 90%;
-    max-width: 800px;
+    max-width: 600px;
     background: #ffffff;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -49,12 +49,33 @@ main {
     padding: 20px 0;
 }
 
-.price-list-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    border: 2px solid #ddd;
+.price-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.price-links li {
+    margin: 15px 0;
+}
+
+.price-links a {
+    display: block;
+    font-size: 1.2rem;
+    color: #2575fc;
+    text-decoration: none;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    padding: 10px 15px;
+    border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background 0.3s ease;
+    color: white;
+}
+
+.price-links a:hover {
+    background: linear-gradient(to right, #2575fc, #6a11cb);
+    transform: scale(1.05);
 }
 
 /* Footer */
